@@ -12,12 +12,15 @@ class Movie(models.Model):
     def votes(self):
         return len(Rating.objects.filter(movie=self))
 
-    '''def average_rate(self):
+    def average_rate(self):
         ratings = Rating.objects.filter(movie=self)
         sum = 0
-        for rate in ratings:
-            sum +=rate.stars
-        return sum / len(ratings)'''
+        if len(ratings) == 0:
+            return 0
+        else:
+            for rate in ratings:
+                sum +=rate.stars
+            return sum / len(ratings)
 
 
 class Rating(models.Model):
